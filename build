@@ -409,8 +409,8 @@ if build "av1"; then
 fi
 
 if build "zlib"; then
-	download "https://www.zlib.net/zlib-1.2.11.tar.gz" "zlib-1.2.11.tar.gz"
-	cd "$PACKAGES"/zlib-1.2.11 || exit
+	download "https://www.zlib.net/zlib-1.2.12.tar.gz" "zlib-1.2.12.tar.gz"
+	cd "$PACKAGES"/zlib-1.2.12 || exit
 	execute ./configure --static --prefix="${WORKSPACE}"
 	execute make -j $MJOBS
 	execute make install
