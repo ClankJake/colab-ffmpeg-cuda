@@ -331,13 +331,13 @@ if build "vid_stab"; then
 	build_done "vid_stab"
 fi
 
-if build "expat-2.4.1"; then
-	download "https://sonik.dl.sourceforge.net/project/expat/expat/2.4.4/expat-2.4.4.tar.xz" "expat-2.4.4.tar.xz"
-	cd "$PACKAGES"/expat-2.4.4 || exit
+if build "expat-2.4.8"; then
+	download "https://sonik.dl.sourceforge.net/project/expat/expat/2.4.8/expat-2.4.8.tar.xz" "expat-2.4.8.tar.xz"
+	cd "$PACKAGES"/expat-2.4.8 || exit
 	execute ./configure --prefix="${WORKSPACE}" --enable-shared=no --without-docbook
 	execute make -j $MJOBS
 	execute make install
-	build_done "expat-2.4.1"
+	build_done "expat-2.4.8"
 fi
 
 if build "freetype2"; then
