@@ -341,8 +341,8 @@ if build "expat-2.4.8"; then
 fi
 
 if build "freetype2"; then
-	download "https://sonik.dl.sourceforge.net/project/freetype/freetype2/2.11.1/freetype-2.11.1.tar.gz" "freetype-2.11.1.tar.gz"
-	cd "$PACKAGES"/freetype-2.11.1 || exit
+	download "https://sonik.dl.sourceforge.net/project/freetype/freetype2/2.12.1/freetype-2.12.1.tar.xz" "freetype-2.12.1.tar.gz"
+	cd "$PACKAGES"/freetype-2.12.1 || exit
 	execute ./configure --prefix="${WORKSPACE}" --disable-shared --enable-static --with-png=no --with-harfbuzz=no
 	execute make -j $MJOBS
 	execute make install
@@ -350,17 +350,17 @@ if build "freetype2"; then
 fi
 
 if build "fontconfig-2.13.96"; then
-	download "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.96.tar.gz" "fontconfig-2.13.96.tar.gz"
-	cd "$PACKAGES"/fontconfig-2.13.96 || exit
+	download "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.14.0.tar.gz" "fontconfig-2.14.0.tar.gz"
+	cd "$PACKAGES"/fontconfig-2.14.0 || exit
 	execute ./configure --prefix="${WORKSPACE}" --enable-shared=no
 	execute make -j $MJOBS
 	execute make install
-	build_done "fontconfig-2.13.96"
+	build_done "fontconfig-2.14.0"
 fi
 
 if build "harfbuzz"; then
-	download "https://github.com/harfbuzz/harfbuzz/releases/download/3.4.0/harfbuzz-3.4.0.tar.xz" "harfbuzz-3.4.0.tar.xz"
-	cd "$PACKAGES"/harfbuzz-3.4.0 || exit
+	download "https://github.com/harfbuzz/harfbuzz/releases/download/5.1.0/harfbuzz-5.1.0.tar.xz" "harfbuzz-5.1.0.tar.xz"
+	cd "$PACKAGES"/harfbuzz-5.1.0 || exit
 	execute ./configure --prefix="${WORKSPACE}" --disable-shared --enable-static --with-freetype=yes
 	execute make -j $MJOBS
 	execute make install
@@ -368,8 +368,8 @@ if build "harfbuzz"; then
 fi
 
 if build "fribidi"; then
-	download "https://github.com/fribidi/fribidi/releases/download/v1.0.11/fribidi-1.0.11.tar.xz" "fribidi-1.0.11.tar.xz"
-	cd "$PACKAGES"/fribidi-1.0.11 || exit
+	download "https://github.com/fribidi/fribidi/releases/download/v1.0.12/fribidi-1.0.12.tar.xz" "fribidi-1.0.12.tar.xz"
+	cd "$PACKAGES"/fribidi-1.0.12 || exit
 	execute ./configure --prefix="${WORKSPACE}" --disable-shared --enable-static
 	execute make -j $MJOBS
 	execute make install
@@ -418,8 +418,8 @@ if build "zlib"; then
 fi
 
 if build "openssl"; then
-	download "https://www.openssl.org/source/openssl-1.1.1m.tar.gz" "openssl-1.1.1m.tar.gz"
-	cd "$PACKAGES"/openssl-1.1.1m || exit
+	download "https://www.openssl.org/source/openssl-1.1.1q.tar.gz" "openssl-1.1.1q.tar.gz"
+	cd "$PACKAGES"/openssl-1.1.1q || exit
 	execute ./config --prefix="${WORKSPACE}" --openssldir="${WORKSPACE}" --with-zlib-include="${WORKSPACE}"/include/ --with-zlib-lib="${WORKSPACE}"/lib no-shared zlib
 	execute make -j $MJOBS
 	execute make install
@@ -427,19 +427,19 @@ if build "openssl"; then
 fi
 
 if build "srt"; then
-	download "https://github.com/Haivision/srt/archive/v1.4.3.tar.gz" "srt-1.4.3.tar.gz"
-	cd "$PACKAGES"/srt-1.4.3 || exit
+	download "https://github.com/Haivision/srt/archive/refs/tags/v1.5.0.tar.gz" "srt-1.5.0.tar.gz"
+	cd "$PACKAGES"/srt-1.5.0 || exit
 	export OPENSSL_ROOT_DIR="${WORKSPACE}"
 	export OPENSSL_LIB_DIR="${WORKSPACE}"/lib
 	export OPENSSL_INCLUDE_DIR="${WORKSPACE}"/include/
-	execute cmake "$PACKAGES"/srt-1.4.3 -DCMAKE_INSTALL_PREFIX="${WORKSPACE}" -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_INSTALL_BINDIR=bin -DCMAKE_INSTALL_INCLUDEDIR=include -DENABLE_SHARED=OFF -DENABLE_STATIC=ON -DENABLE_APPS=OFF -DUSE_STATIC_LIBSTDCXX=ON
+	execute cmake "$PACKAGES"/srt-1.5.0 -DCMAKE_INSTALL_PREFIX="${WORKSPACE}" -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_INSTALL_BINDIR=bin -DCMAKE_INSTALL_INCLUDEDIR=include -DENABLE_SHARED=OFF -DENABLE_STATIC=ON -DENABLE_APPS=OFF -DUSE_STATIC_LIBSTDCXX=ON
 	execute make install
 	build_done "srt"
 fi
 
 if build "libass"; then
-	download "https://github.com/libass/libass/releases/download/0.15.2/libass-0.15.2.tar.gz" "libass-0.15.2.tar.gz"
-	cd "$PACKAGES"/libass-0.15.2 || exit 
+	download "https://github.com/libass/libass/releases/download/0.16.0/libass-0.16.0.tar.gz" "libass-0.16.0.tar.gz"
+	cd "$PACKAGES"/libass-0.16.0 || exit 
 	execute ./configure --prefix="${WORKSPACE}" --disable-shared --disable-require-system-font-provider
 	execute make -j $MJOBS
 	execute make install
@@ -462,8 +462,8 @@ if command -v nvcc > /dev/null ; then
 fi
 
 build "ffmpeg"
-download "http://ffmpeg.org/releases/ffmpeg-4.4.1.tar.bz2" "ffmpeg-4.4.1.tar.bz2"
-cd "$PACKAGES"/ffmpeg-4.4.1/ || exit
+download "http://ffmpeg.org/releases/ffmpeg-5.1.tar.bz2" "ffmpeg-5.1.tar.bz2"
+cd "$PACKAGES"/ffmpeg-5.1/ || exit
 # shellcheck disable=SC2086
 ./configure $ADDITIONAL_CONFIGURE_OPTIONS \
     --pkgconfigdir="$WORKSPACE/lib/pkgconfig" \
