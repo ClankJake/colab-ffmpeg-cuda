@@ -427,19 +427,19 @@ if build "openssl"; then
 fi
 
 if build "srt"; then
-	download "https://github.com/Haivision/srt/archive/refs/tags/v1.5.0.tar.gz" "srt-1.5.0.tar.gz"
-	cd "$PACKAGES"/srt-1.5.0 || exit
+	download "https://github.com/Haivision/srt/archive/refs/tags/v1.5.1.tar.gz" "srt-1.5.1.tar.gz"
+	cd "$PACKAGES"/srt-1.5.1 || exit
 	export OPENSSL_ROOT_DIR="${WORKSPACE}"
 	export OPENSSL_LIB_DIR="${WORKSPACE}"/lib
 	export OPENSSL_INCLUDE_DIR="${WORKSPACE}"/include/
-	execute cmake "$PACKAGES"/srt-1.5.0 -DCMAKE_INSTALL_PREFIX="${WORKSPACE}" -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_INSTALL_BINDIR=bin -DCMAKE_INSTALL_INCLUDEDIR=include -DENABLE_SHARED=OFF -DENABLE_STATIC=ON -DENABLE_APPS=OFF -DUSE_STATIC_LIBSTDCXX=ON
+	execute cmake "$PACKAGES"/srt-1.5.1 -DCMAKE_INSTALL_PREFIX="${WORKSPACE}" -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_INSTALL_BINDIR=bin -DCMAKE_INSTALL_INCLUDEDIR=include -DENABLE_SHARED=OFF -DENABLE_STATIC=ON -DENABLE_APPS=OFF -DUSE_STATIC_LIBSTDCXX=ON
 	execute make install
 	build_done "srt"
 fi
 
 if build "libass"; then
-	download "https://github.com/libass/libass/releases/download/0.16.0/libass-0.16.0.tar.gz" "libass-0.16.0.tar.gz"
-	cd "$PACKAGES"/libass-0.16.0 || exit 
+	download "https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.gz" "libass-0.17.1.tar.gz"
+	cd "$PACKAGES"/libass-0.17.1 || exit 
 	execute ./configure --prefix="${WORKSPACE}" --disable-shared --disable-require-system-font-provider
 	execute make -j $MJOBS
 	execute make install
@@ -462,8 +462,8 @@ if command -v nvcc > /dev/null ; then
 fi
 
 build "ffmpeg"
-download "http://ffmpeg.org/releases/ffmpeg-5.1.tar.bz2" "ffmpeg-5.1.tar.bz2"
-cd "$PACKAGES"/ffmpeg-5.1/ || exit
+download "http://ffmpeg.org/releases/ffmpeg-6.0.tar.bz2" "ffmpeg-6.0.tar.bz2"
+cd "$PACKAGES"/ffmpeg-6.0/ || exit
 # shellcheck disable=SC2086
 ./configure $ADDITIONAL_CONFIGURE_OPTIONS \
     --pkgconfigdir="$WORKSPACE/lib/pkgconfig" \
